@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir PKL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        label {
+            font-size: 16px;
+            color: #34495e;
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        .form-container {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Formulir PKL</h1>
+        <div class="form-container">
+            <form id="pklForm" onsubmit="saveData(event)">
+                <label for="nama">Nama Lengkap:</label>
+                <input type="text" id="nama" name="nama" required>
+
+                <label for="alamat">Alamat:</label>
+                <input type="text" id="alamat" name="alamat" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="tanggal">Tanggal Mulai PKL:</label>
+                <input type="date" id="tanggal" name="tanggal" required>
+
+                <label for="instansi">Instansi/Perusahaan:</label>
+                <input type="text" id="instansi" name="instansi" required>
+
+                <label for="keperluan">Keperluan PKL:</label>
+                <textarea id="keperluan" name="keperluan" rows="4" required></textarea>
+
+                <input type="submit" value="Simpan Data">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function saveData(event) {
+            event.preventDefault();
+
+            const nama = document.getElementById('nama').value;
+            const alamat = document.getElementById('alamat').value;
+            const email = document.getElementById('email').value;
+            const tanggal = document.getElementById('tanggal').value;
+            const instansi = document.getElementById('instansi').value;
+            const keperluan = document.getElementById('keperluan').value;
+
+            // Ambil data yang telah disubmit dan simpan di LocalStorage
+            let pklData = JSON.parse(localStorage.getItem('pklData')) || [];
+            pklData.push({ nama, alamat, email, tanggal, instansi, keperluan });
+
+            localStorage.setItem('pklData', JSON.stringify(pklData));
+
+            // Setelah disimpan, arahkan ke halaman selesai daftar
+            window.location.href = 'selesai_daftar.html';
+        }
+    </script>
+
+</body>
+</html>

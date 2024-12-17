@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Pengisi Formulir PKL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #ecf0f1;
+        }
+        .success-message {
+            display: none;
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Daftar Pengisi Formulir PKL</h1>
+        
+        <!-- Pesan berhasil disimpan -->
+        <div id="successMessage" class="success-message">
+            <strong>Data Berhasil Disimpan!</strong>
+        </div>
+
+        <!-- Tabel Daftar -->
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>Email</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Instansi</th>
+                    <th>Keperluan PKL</th>
+                </tr>
+            </thead>
+            <tbody id="pklList"></tbody>
+        </table>
+        
+        <!-- Tombol Kembali -->
+        <button class="back-button" onclick="window.location.href='index.html'">Kembali ke Formulir</button>
+        
+        <!-- Tombol Simpan Data (untuk simulasi menyimpan dan melihat hasilnya) -->
+        <button class="back-button" onclick="saveData()">Simpan Data</button>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan data dari LocalStorage
+        window.onload = function() {
+            const pklData = JSON.parse(localStorage.getItem('pklData')) || [];
+            const tableBody = document.getElementById('pklList');
+
+            pklData.forEach((data, index) => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${data.nama}</td>
+                    <td>${data.alamat}</td>
+                    <td>${data.email}</td>
+                    <td>${data.tanggal}</td>
+                    <td>${data.instansi}</td>
+                    <td>${data.keperluan}</td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+        };
+
+        // Fungsi untuk menyimpan data dan menampilkan pesan sukses
+        function saveData() {
+            // Ambil data yang ada di LocalStorage
+            const pklData = JSON.parse(localStorage.getItem('pklData')) || [];
+
+            // Tampilkan pesan berhasil
+            document.getElementById('successMessage').style.display = 'block';
+
+            // Simulasikan penyimpanan data
+            setTimeout(function() {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 3000); // Pesan hilang setelah 3 detik
+        }
+    </script>
+
+</body>
+</html>
